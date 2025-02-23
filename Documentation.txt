@@ -1,1 +1,10 @@
-
+Python - https://docs.python.org/3/
+Raspberry Pi - https://www.raspberrypi.com/documentation/
+Thonny - https://thonny.org/
+VS Code - https://code.visualstudio.com/docs
+OpenCV - https://docs.opencv.org/4.x/index.html
+MediaPipe - https://ai.google.dev/edge/mediapipe/solutions/guide
+TensorFlow - https://www.tensorflow.org/api_docs
+NumPy - https://numpy.org/doc/
+gTTS - https://gtts.readthedocs.io/en/latest/
+Tesseract - https://tesseract-ocr.github.io/
