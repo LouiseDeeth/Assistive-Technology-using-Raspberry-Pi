@@ -12,3 +12,6 @@ Tesseract-OCR - for text recognition
 if you need to install again run:
 
 pip install -r requirements.txt
+
+Raspberry PI needs OpenCV and MediaPipe installed:
+-	pip install opencv-python mediapipe numpy
