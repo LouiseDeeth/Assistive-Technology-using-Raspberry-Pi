@@ -1,0 +1,10 @@
+1.	Raspberry PI needs MediaPipe and OpenCV installed 
+-	pip install opencv-python mediapipe numpy
+
+2.	Test camera (python script)
+
+3.	Find an existing dataset or training model 
+(options)
+https://teachablemachine.withgoogle.com/
+https://github.com/ardamavi/Sign-Language-Digits-Dataset
+https://www.kaggle.com/ 
