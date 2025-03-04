@@ -1,5 +1,6 @@
 1.	Raspberry PI needs MediaPipe and OpenCV installed 
--	pip install opencv-python mediapipe numpy
+- sudo apt install -y python3-numpy
+- sudo apt install -y python3-opencv
 
 2.	Test camera (python script)
 
