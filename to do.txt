@@ -9,3 +9,21 @@
 https://teachablemachine.withgoogle.com/
 https://github.com/ardamavi/Sign-Language-Digits-Dataset
 https://www.kaggle.com/ 
+
+Flask
+- mkdir backend
+- cd backend
+- python -m venv venv
+- venv\Scripts\activate
+- pip install flask flask-cors
+Flask uunning on http://127.0.0.1:5000/
+
+
+React
+- cd frontend
+- npm start
+React running on http://localhost:3000/
+
+In VS Code install extensions for:
+ - Python
+ - ES7+ React/Redux Snippets
