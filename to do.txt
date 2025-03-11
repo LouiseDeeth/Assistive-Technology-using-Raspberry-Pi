@@ -18,7 +18,6 @@ Flask
 - pip install flask flask-cors
 Flask uunning on http://127.0.0.1:5000/
 
-
 React
 - cd frontend
 - npm start
@@ -27,3 +26,28 @@ React running on http://localhost:3000/
 In VS Code install extensions for:
  - Python
  - ES7+ React/Redux Snippets
+
+10/03/25
+- install google-generativeai on pi - allows interaction with Gemini AI.
+- install requests on pi - allows for API calls.
+
+Scripts
+ 1. Capture frames from camera e.g. camera_capture.py
+      - import opencv, base64, numpy etc
+      - use .VideoCapture for default camera
+      - loop while true and read feed from camera
+      - image show camera feed
+      - press key to exit
+      - release and destory windows
+2. Process frames before sending to ai
+      - continue with the same script 
+      - resize image frame - reduce upload size
+      - convert to base64 for api
+3. Send image to AI
+      - get api key from google ai studio https://ai.google.dev/
+      - ensure gemini sdk has been installed
+      - create new script e.g. sign_language_translator.py
+        - use api key to configure ai
+        - function to send image to model and receive response
+        - store / display response
+ 
