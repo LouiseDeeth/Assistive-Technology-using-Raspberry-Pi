@@ -8,3 +8,4 @@ TensorFlow - https://www.tensorflow.org/api_docs
 NumPy - https://numpy.org/doc/
 gTTS - https://gtts.readthedocs.io/en/latest/
 Tesseract - https://tesseract-ocr.github.io/
+Gemini API - https://ai.google.dev/
