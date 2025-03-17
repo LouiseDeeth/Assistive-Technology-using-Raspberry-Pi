@@ -1,38 +1,143 @@
-.App {
+/* Global Styles */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
   text-align: center;
+  background-color: #ffffff;
+  color: #000000;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+/* Profile Page Layout */
+.profile-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  padding: 20px;
+  max-width: 400px;
+  margin: auto;
+}
+
+/* Profile Header */
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 10px;
+}
+
+.back-button {
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  position: absolute;
+  left: 20px;
+  top: 20px;
+}
+
+/* Profile Avatar */
+.Picture1 {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-top: 10px;
+  border: 4px solid #ffcc00; 
+}
+
+/* Profile Info */
+.profile-info {
+  text-align: center;
+  padding: 10px;
+  max-width: 80%;
+}
+
+.logo {
+  width: 100px; /* Adjust size as needed */
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-info p {
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+/* Dark Mode Toggle */
+.toggle-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+}
+
+/* Buttons */
+.profile-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.logout-btn,
+.delete-btn {
+  width: 80%;
+  max-width: 250px;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 8px;
+  background-color: #ff4d4d;
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.delete-btn:hover,
+.logout-btn:hover {
+  opacity: 0.8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+/* Dark Mode */
+.dark {
+  background-color: #333;
+  color: white;
+}
+
+/* Camera Page Styling */
+.camera-page video {
+  width: 80%;
+  border-radius: 10px;
+}
+
+/* Alphabet Grid */
+.alphabet-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.alphabet-item {
+  margin: 10px;
+  text-align: center;
+}
+
+/* Navbar Styling */
+.navbar {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background: teal;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+.navbar a {
+  font-size: 24px;
+  text-decoration: none;
+  color: white;
 }

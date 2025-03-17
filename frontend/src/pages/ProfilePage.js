@@ -1,0 +1,37 @@
+import React, { useState } from "react";
+import { Switch } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+function ProfilePage() {
+    const [darkMode, setDarkMode] = useState(false);
+    const navigate = useNavigate();
+
+    return (
+        <div className={`profile-page ${darkMode ? "dark" : ""}`}>
+            <div className="profile-header">
+                <button onClick={() => navigate("/")}>←</button>
+
+            </div>
+            <img src="/picture1.png" alt="Sign Language Picture" className="Picture1" />
+            <p>Hi there! I communicate using sign language. Excited to connect and learn together!</p>
+            <p>Feel free to interact with me using sign or text!</p>
+
+            <div>
+                <label className="LightDarkToggle">
+                    Dark/Light Mode
+                    <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
+                </label>
+            </div>
+            <div>
+                <button className="logout-btn">Logout</button>
+            </div>
+            <br></br>
+            <div>
+                <button className="delete-btn">Delete Account</button>
+            </div>
+           
+        </div>
+    );
+}
+
+export default ProfilePage;
