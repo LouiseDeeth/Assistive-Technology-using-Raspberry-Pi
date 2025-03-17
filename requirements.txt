@@ -4,3 +4,5 @@ tensorflow
 tensorflow-lite
 gtts
 numpy
+google-generativeai 
+requests
