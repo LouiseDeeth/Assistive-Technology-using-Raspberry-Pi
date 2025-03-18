@@ -18,27 +18,6 @@ body {
   margin: auto;
 }
 
-/* Profile Header */
-.profile-header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  position: relative;
-  padding: 10px;
-}
-
-/* Back Button */
-.back-button {
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-  position: absolute;
-  left: 20px;
-  top: 10px;
-}
-
 /* Profile Avatar */
 .profile-image-container img{
   margin-top: 10px;
@@ -128,5 +107,60 @@ body {
 .navbar a {
   font-size: 28px;
   text-decoration: none;
+  color: white;
+}
+
+/* General Page Styling */
+.alphabet-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Sign Display Section */
+.sign-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 250px;
+  height: 250px;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  background-color: #f9f9f9;
+}
+
+/* Sign Image */
+.sign-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+/* Keyboard Grid */
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 10px;
+  justify-content: center;
+  max-width: 300px;
+}
+
+/* Keyboard Keys */
+.key {
+  background-color: #e0e0e0;
+  border: none;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Highlight Selected Letter */
+.key.active {
+  background-color: teal;
   color: white;
 }

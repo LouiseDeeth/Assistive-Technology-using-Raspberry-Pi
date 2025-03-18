@@ -6,7 +6,7 @@ function Navbar() {
         <nav className="navbar">
             <Link to="/">👤</Link>
             <Link to="/camera">📷</Link>
-            <Link to="/favorites">❤️</Link>
+            <Link to="/favourites">❤️</Link>
             <Link to="/alphabet">🔤</Link>
         </nav>
     );

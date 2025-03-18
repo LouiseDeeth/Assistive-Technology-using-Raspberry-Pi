@@ -8,9 +8,6 @@ function ProfilePage() {
 
     return (
         <div className={`profile-page ${darkMode ? "dark" : ""}`}>
-            <div className="profile-header">
-                <button onClick={() => navigate("/")}>←</button>
-            </div>
             <div className="profile-image-container">
                 <img src="/images/picture1.png" alt="Sign Language Picture" className="Picture1" />
 
