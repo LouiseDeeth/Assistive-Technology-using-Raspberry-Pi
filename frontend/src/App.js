@@ -5,6 +5,7 @@ import CameraPage from "./pages/CameraPage";
 import FavoritesPage from "./pages/FavoritesPage";
 import AlphabetPage from "./pages/AlphabetPage";
 import Navbar from "./components/Navbar";
+import "./App.css"; 
 import { Button } from "@mui/material";
 import { ThemeProvider } from "@mui/material/styles";
 import styled from "@emotion/styled";
