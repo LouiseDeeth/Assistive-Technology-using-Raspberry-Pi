@@ -10,12 +10,14 @@ function ProfilePage() {
         <div className={`profile-page ${darkMode ? "dark" : ""}`}>
             <div className="profile-header">
                 <button onClick={() => navigate("/")}>←</button>
-
             </div>
-            <img src="/picture1.png" alt="Sign Language Picture" className="Picture1" />
-            <p>Hi there! I communicate using sign language. Excited to connect and learn together!</p>
-            <p>Feel free to interact with me using sign or text!</p>
+            <div className="profile-image-container">
+                <img src="/images/picture1.png" alt="Sign Language Picture" className="Picture1" />
 
+                <p>Hi there! </p> 
+                <p> I communicate using sign language. Excited to connect and learn together!</p>
+                <p>Feel free to interact with me using sign or text!</p>
+            </div>
             <div>
                 <label className="LightDarkToggle">
                     Dark/Light Mode
@@ -25,7 +27,6 @@ function ProfilePage() {
             <div>
                 <button className="logout-btn">Logout</button>
             </div>
-            <br></br>
             <div>
                 <button className="delete-btn">Delete Account</button>
             </div>
