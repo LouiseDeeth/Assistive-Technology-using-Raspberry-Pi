@@ -5,7 +5,7 @@ function FavoritesPage() {
 
     return (
         <div className="favorites-page">
-            <h2>Favorite Signs</h2>
+            <h2>Favourite Signs</h2>
             <ul>
                 {favorites.map((sign, index) => (
                     <li key={index}>{sign}</li>

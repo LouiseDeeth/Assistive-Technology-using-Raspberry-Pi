@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import ProfilePage from "./pages/ProfilePage";
 import CameraPage from "./pages/CameraPage";
-import FavoritesPage from "./pages/FavoritesPage";
+import FavouritesPage from "./pages/FavoritesPage";
 import AlphabetPage from "./pages/AlphabetPage";
 import Navbar from "./components/Navbar";
 import "./App.css"; 
@@ -26,7 +26,7 @@ function App() {
             <Routes>
                 <Route path="/" element={<ProfilePage />} />
                 <Route path="/camera" element={<CameraPage />} />
-                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/favourites" element={<FavouritesPage />} />
                 <Route path="/alphabet" element={<AlphabetPage />} />
             </Routes>
         </Router>

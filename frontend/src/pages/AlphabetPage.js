@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 function AlphabetPage() {
     const alphabet = [
@@ -30,25 +30,46 @@ function AlphabetPage() {
         { letter: "Z", image: "/images/signs/Z.jpeg" },
         { letter: "0", image: "/images/signs/0.jpeg" },
         { letter: "1", image: "/images/signs/1.jpeg" },
-        { letter: "2", image: "/imagessigns/2.jpeg" },
+        { letter: "2", image: "/images/signs/2.jpeg" },
         { letter: "3", image: "/images/signs/3.jpeg" },
         { letter: "4", image: "/images/signs/4.jpeg" },
         { letter: "5", image: "/images/signs/5.jpeg" },
         { letter: "6", image: "/images/signs/6.jpeg" },
         { letter: "7", image: "/images/signs/7.jpeg" },
         { letter: "8", image: "/images/signs/8.jpeg" },
-        { letter: "9", image: "/images/signs/9.jpeg" },    
+        { letter: "9", image: "/images/signs/9.jpeg" },
     ];
+
+    const [selectedSign, setSelectedSign] = useState(null);
+
+    const handleLetterClick = (letter) => {
+        const foundSign = alphabet.find(sign => sign.letter === letter);
+        setSelectedSign(foundSign);
+    };
 
     return (
         <div className="alphabet-page">
             <h2>Learn Sign Language Alphabet</h2>
-            <div className="alphabet-grid">
+            
+            {/* Sign Display Section */}
+            <div className="sign-display">
+                {selectedSign ? (
+                    <img src={selectedSign.image} alt={selectedSign.letter} className="sign-image" />
+                ) : (
+                    <p>Select a letter or number to see the sign</p>
+                )}
+            </div>
+
+            {/* On-Screen Keyboard */}
+            <div className="keyboard">
                 {alphabet.map((sign) => (
-                    <div key={sign.letter} className="alphabet-item">
-                        <img src={sign.image} alt={sign.letter} />
-                        <p>{sign.letter}</p>
-                    </div>
+                    <button 
+                        key={sign.letter} 
+                        className={`key ${selectedSign?.letter === sign.letter ? "active" : ""}`}
+                        onClick={() => handleLetterClick(sign.letter)}
+                    >
+                        {sign.letter}
+                    </button>
                 ))}
             </div>
         </div>
@@ -56,4 +77,3 @@ function AlphabetPage() {
 }
 
 export default AlphabetPage;
-
