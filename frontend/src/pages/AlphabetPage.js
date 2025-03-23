@@ -49,7 +49,7 @@ function AlphabetPage() {
 
     return (
         <div className="alphabet-page">
-            <h2>Learn Sign Language Alphabet</h2>
+            <h2>Sign Language Alphabet</h2>
             
             {/* Sign Display Section */}
             <div className="sign-display">
