@@ -15,6 +15,7 @@ function CameraPage() {
         <div className="camera-page">
             <h2>Camera</h2>
             <video ref={videoRef} autoPlay></video>
+            <button>Take Picture</button>
         </div>
     );
 }
