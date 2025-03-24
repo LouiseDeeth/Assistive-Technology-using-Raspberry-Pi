@@ -17,4 +17,7 @@ class Translator:
     
         return base64.b64encode(buffer).decode('utf-8')
     
+    def encode_image(self_frame):
+        _, buffer = cv2.imencode('.jpg', frame)
+        return base64.b64encode(buffer).decode('utf-8')
 
