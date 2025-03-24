@@ -73,3 +73,12 @@ class Camera:
         if self.cap is not None:
             self.cap.release()
             self.cap = None
+
+"""
+if __name__ == "__main__":
+print("Testing camera module...")
+if test_camera():
+    print("Camera test successful!")
+else:
+    print("Camera test failed!")
+"""
