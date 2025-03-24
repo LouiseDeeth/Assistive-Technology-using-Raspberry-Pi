@@ -42,4 +42,34 @@ class Camera:
             time.sleep(delay)
         return True
 
- 
+    def capture_image(self, countdown = 3, save_image = True):
+        if self.cap is None or not self.cap.isOpened():
+            print("Error: camera not initialized")
+            return None
+        
+        for i in range(countdown, 0, -1):
+            print(f"Taking picture in {i}...")
+            time.sleep(1)
+        
+        print("Capturing image!")
+
+        ret, frame = self.cap.read()
+
+        if not ret:
+            print("Error: failed to capture image")
+            return None
+        
+        filename = None
+
+        if save_image:
+            timestamp = int(time.time())
+            filename = f"output/sign_image_{timestamp}.jpg"
+            cv2.imwrite(filename, frame)
+            print(f"Image captured and saved to {filename}")
+
+        return frame, filename
+
+    def release(self):
+        if self.cap is not None:
+            self.cap.release()
+            self.cap = None
