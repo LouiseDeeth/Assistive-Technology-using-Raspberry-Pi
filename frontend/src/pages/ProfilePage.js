@@ -14,18 +14,13 @@ function ProfilePage({ darkMode, setDarkMode }) {
                 <p> I communicate using sign language. Excited to connect and learn together!</p>
                 <p>Feel free to interact with me using sign or text!</p>
             </div>
-            
+
             <div>
                 <label className="LightDarkToggle">
                     Dark/Light Mode
                     <Switch checked={darkMode} onChange={() => setDarkMode(!darkMode)} />
                 </label>
-            </div>
-
-            <div className="profile-buttons">
-                <button className="logout-btn">Logout</button>
-                <button className="delete-btn">Delete Account</button>
-            </div>         
+            </div>     
         </div>
     );
 }
