@@ -29,4 +29,17 @@ class Camera:
 
         return True
 
+    def adjust_camera(self, frames = 5, delay = 0.5):
+        """capture some frames to allow the camera to adjust"""
+        if self.cap is None or not self.cap.isOpened():
+            print("Error: camera not initialized")
+            return False
+        print("Camera is adjusting . . .")
+        for i in range(frames):
+            ret, _ = self.cap.read()
+            if not ret:
+                print(f"Warning: failed to read frame {i} during camera adjustment")
+            time.sleep(delay)
+        return True
+
  
