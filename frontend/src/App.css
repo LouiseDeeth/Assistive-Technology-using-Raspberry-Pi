@@ -1,3 +1,7 @@
+* {
+  box-sizing: border-box;
+}
+
 /* General Styles */
 body {
   font-family: Arial, sans-serif;
@@ -29,7 +33,7 @@ body {
   height: 120px;
   border-radius: 30%;
   object-fit: cover;
-  border: 4px solid #ffcc00;
+  border: 4px solid teal;
   background-color: #f8f8f8;
   padding: 15px;
 }
@@ -63,30 +67,6 @@ body {
   align-items: center;
 }
 
-.logout-btn,
-.delete-btn {
-  width: 95%;
-  max-width: 350px;
-  padding: 12px;
-  font-size: 16px;
-  border: none;
-  cursor: pointer;
-  border-radius: 8px;
-  text-align: center;
-  margin-top: 20px;
-}
-
-.logout-btn,
-.delete-btn {
-  background-color: red;
-  color: white;
-}
-
-.logout-btn:hover,
-.delete-btn:hover {
-  opacity: 0.8;
-}
-
 /* Dark Mode */
 .dark {
   background-color: #222;
@@ -95,7 +75,7 @@ body {
 
 .dark .sign-display,
 .dark .navbar {
-  background-color: #333;
+  background-color: #004d4d;
 }
 
 .dark .phrase-btn,
@@ -137,10 +117,11 @@ body {
   justify-content: center;
   width: 250px;
   height: 250px;
-  border: 2px solid #ddd;
-  border-radius: 10px;
+  border: 5px solid teal;
+  border-radius: 16px;
   margin-bottom: 20px;
   background-color: #f9f9f9;
+  overflow: hidden;
 }
 
 /* Sign Image */
@@ -148,6 +129,7 @@ body {
   width: 100%;
   height: 100%;
   object-fit: contain;
+  border-radius: 0;
 }
 
 /* Keyboard Grid */
@@ -167,12 +149,17 @@ body {
   font-weight: bold;
   padding: 10px;
   cursor: pointer;
-  border-radius: 5px;
+  border-radius: 6px;
   text-align: center;
 }
 
 /* Highlight Selected Letter */
 .key.active {
+  background-color: teal;
+  color: white;
+}
+
+.key:hover {
   background-color: teal;
   color: white;
 }
@@ -218,24 +205,6 @@ body {
   padding-bottom: 80px; 
 }
 
-.sign-display {
-  width: 250px;
-  height: 250px;
-  background-color: #f9f9f9;
-  border: 2px solid #ddd;
-  border-radius: 10px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sign-image {
-  width: 100%;
-  height: 100%;
-  object-fit: contain;
-}
-
 .phrase-buttons {
   display: flex;
   flex-direction: column;
@@ -256,4 +225,28 @@ body {
 .phrase-btn.active {
   background-color: teal;
   color: white;
+}
+
+.phrase-btn:hover {
+  background-color: teal;
+  color: white;
+}
+
+button, body, .profile-page, .alphabet-page, .favorites-page {
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+
+button:focus {
+  outline: 2px solid teal;
+}
+
+.dark .profile-page,
+.dark .alphabet-page,
+.dark .favorites-page,
+.dark .camera-page {
+  background-color: #222;
+  min-height: 100vh;
+  padding-bottom: 80px; /* for navbar space */
+  box-sizing: border-box;
 }
