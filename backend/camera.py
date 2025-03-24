@@ -1,46 +1,84 @@
-# import opencv, base64, numpy
-import cv2
-import base64
-import google.generativeai as genai
+import numpy as np
+import cv2 #openCV 
+import base64 #base64
+import google.generativeai as genai # gemini api
 from flask import Flask, Response, request, jsonify
 from flask_cors import CORS
 
-API_KEY = "AIzaSyAv1QNdeHX25MnEvW4tp4sXrSwknuNAoU0"
-genai.configure(api_key=API_KEY)
+class Camera:
+    def __init__(self, camera_index = 0, resolution = (640, 480)):
+        """initialising camera with specific settings"""
+        self.camera_index = camera_index
+        self.resolution = resolution
+        self.cap = None
+    
+    def initialize(self):
+        """connect to camera"""
+        self.cap = cv2.VideoCapture(self.camera_index)
+        
+        if not self.cap.isOpened():
+            print("Error: could not open camera")
+            return False
+        
+        #set resolution
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.resolution[0])
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.resolution[1])
 
-app = Flask(__name__)
-CORS(app)
+        #creates output directory if doesn't already exist
+        os.makedirs("output", exist_ok=True)
 
-camera = cv2.VideoCapture(0) # initialize camera
+        return True
 
-def generate_frames():
-    while True: # loop while true and read feed from camera
-        success, frame = camera.read()
-        if not success:
-            break
-        else:
-            _, buffer = cv2.imencode(".jpg", frame)
-            frame_bytes = buffer.tobytes()
-            yield(b"--frame\r\n"
-                  b"Content-Type: image/jpeg\r\n\r\n" + frame_bytes + b"\r\n")
+    def adjust_camera(self, frames = 5, delay = 0.5):
+        """capture some frames to allow the camera to adjust"""
+        if self.cap is None or not self.cap.isOpened():
+            print("Error: camera not initialized")
+            return False
+        print("Camera is adjusting . . .")
+        for i in range(frames):
+            ret, _ = self.cap.read()
+            if not ret:
+                print(f"Warning: failed to read frame {i} during camera adjustment")
+            time.sleep(delay)
+        return True
 
+    def capture_image(self, countdown = 3, save_image = True):
+        if self.cap is None or not self.cap.isOpened():
+            print("Error: camera not initialized")
+            return None
+        
+        for i in range(countdown, 0, -1):
+            print(f"Taking picture in {i}...")
+            time.sleep(1)
+        
+        print("Capturing image!")
 
+        ret, frame = self.cap.read()
 
-def process_frame():
-    success,frame = camera.read()
-    if not success:
-        return jsonify({"error": "Failed to capture image"}), 500
-    # convert to base64 for api usage
-    _, buffer = cv2.imencode(".jpg", frame)
-    image_base64 = base64.b64encode(buffer).decode("utf-8")
-    model = genai.GenerativeModel("gemini-pro-vision")
-    response = model.generate_content([image_base64, "What is the ASL sign in this image?"])
+        if not ret:
+            print("Error: failed to capture image")
+            return None
+        
+        filename = None
 
-    return jsonify({"translation": response.text})
+        if save_image:
+            timestamp = int(time.time())
+            filename = f"output/sign_image_{timestamp}.jpg"
+            cv2.imwrite(filename, frame)
+            print(f"Image captured and saved to {filename}")
 
+        return frame, filename
 
+    def release(self):
+        if self.cap is not None:
+            self.cap.release()
+            self.cap = None
+
+"""
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000, debug=True)
-
-
- 
+print("Testing camera module...")
+if test_camera():
+    print("Camera test successful!")
+else:
+    print("Camera test failed!")
+"""
