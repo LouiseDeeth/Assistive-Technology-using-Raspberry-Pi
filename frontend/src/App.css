@@ -89,7 +89,18 @@ body {
 
 /* Dark Mode */
 .dark {
+  background-color: #222;
+  color: white;
+}
+
+.dark .sign-display,
+.dark .navbar {
   background-color: #333;
+}
+
+.dark .phrase-btn,
+.dark .key {
+  background-color: #444;
   color: white;
 }
 
