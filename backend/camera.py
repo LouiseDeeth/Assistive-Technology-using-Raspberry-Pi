@@ -14,7 +14,19 @@ class Camera:
     
     def initialize(self):
         """connect to camera"""
+        self.cap = cv2.VideoCapture(self.camera_index)
+        
+        if not self.cap.isOpened():
+            print("Error: could not open camera")
+            return False
+        
+        #set resolution
+        self.cap.set(cv2.CAP_PROP_FRAME_WIDTH, self.resolution[0])
+        self.cap.set(cv2.CAP_PROP_FRAME_HEIGHT, self.resolution[1])
 
+        #creates output directory if doesn't already exist
+        os.makedirs("output", exist_ok=True)
 
+        return True
 
  
