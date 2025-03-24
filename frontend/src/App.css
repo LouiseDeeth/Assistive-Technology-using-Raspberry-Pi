@@ -116,6 +116,7 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  padding-bottom: 80px; 
 }
 
 /* Sign Display Section */
@@ -194,10 +195,50 @@ body {
   background-color: darkcyan;
 }
 
-.alphabet-page {
+.favorites-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
-  padding-bottom: 80px; /* ✅ Add this line */
+  padding-bottom: 80px; 
+}
+
+.sign-display {
+  width: 250px;
+  height: 250px;
+  background-color: #f9f9f9;
+  border: 2px solid #ddd;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sign-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.phrase-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 80%;
+  max-width: 300px;
+}
+
+.phrase-btn {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.phrase-btn.active {
+  background-color: teal;
+  color: white;
 }
