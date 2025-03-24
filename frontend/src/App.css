@@ -193,3 +193,11 @@ body {
 .camera-page button:hover {
   background-color: darkcyan;
 }
+
+.alphabet-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  padding-bottom: 80px; /* ✅ Add this line */
+}
