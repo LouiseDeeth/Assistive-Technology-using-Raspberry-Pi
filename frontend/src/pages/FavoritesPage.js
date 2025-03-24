@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-function FavoritesPage() {
+function FavoritesPage({ darkMode }) {
   const phrases = [
-    { text: "Hello", image: "/images/favourites/Hello.png" },
-    { text: "Goodbye", image: "/images/favourites/Goodbye.png" },
-    { text: "I love you", image: "/images/favourites/ILoveYou.png" },
-    { text: "Thank you", image: "/images/favourites/ThankYou.png" },
-    { text: "Yes", image: "/images/favourites/Yes.png" },
-    { text: "No", image: "/images/favourites/No.png" },
-    { text: "Please", image: "/images/favourites/Please.png" },
-    { text: "Sorry", image: "/images/favourites/Sorry.png" },
+    { text: "Hello", image: "/images/favorites/Hello.png" },
+    { text: "Goodbye", image: "/images/favorites/Goodbye.png" },
+    { text: "I love you", image: "/images/favorites/ILoveYou.png" },
+    { text: "Thank you", image: "/images/favorites/ThankYou.png" },
+    { text: "Yes", image: "/images/favorites/Yes.png" },
+    { text: "No", image: "/images/favorites/No.png" },
+    { text: "Please", image: "/images/favorites/Please.png" },
+    { text: "Sorry", image: "/images/favorites/Sorry.png" },
   ];
 
   const [selectedPhrase, setSelectedPhrase] = useState(null);
