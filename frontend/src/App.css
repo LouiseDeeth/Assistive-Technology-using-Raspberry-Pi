@@ -255,6 +255,7 @@ button:focus {
 .phrase-audio {
   display: flex;
   align-items: center;
+  justify-content: space-between; /* Aligns the audio button to the right */
   width: 100%;
 }
 
@@ -266,7 +267,7 @@ button:focus {
   border: none;
   border-radius: 6px;
   cursor: pointer;
-  text-align: left; /* Optional: align text left */
+  text-align: center; 
 }
 
 .audio-btn {
