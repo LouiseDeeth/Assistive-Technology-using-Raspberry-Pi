@@ -45,8 +45,13 @@ function AlphabetPage() {
     const handleLetterClick = (letter) => {
         const foundSign = alphabet.find(sign => sign.letter === letter);
         setSelectedSign(foundSign);
+
+        // Play the corresponding audio
+    const audio = new Audio(`/audio/alphabet/${letter}.mp3`);
+    audio.play();
     };
 
+    
     return (
         <div className="alphabet-page">
             <h2>Sign Language Alphabet</h2>
