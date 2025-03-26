@@ -47,8 +47,9 @@ function AlphabetPage() {
         setSelectedSign(foundSign);
 
         // Play the corresponding audio
-    const audio = new Audio(`/audio/alphabet/${letter}.mp3`);
-    audio.play();
+        const audioFolder = isNaN(letter) ? "alphabet" : "numbers"; //NaN = Not a Number
+        const audio = new Audio(`/audio/${audioFolder}/${letter}.mp3`);
+        audio.play();
     };
 
     
