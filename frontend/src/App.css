@@ -250,3 +250,36 @@ button:focus {
   padding-bottom: 80px; /* for navbar space */
   box-sizing: border-box;
 }
+
+/* audio buttons */
+.phrase-audio {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.phrase-btn {
+  flex: 1; /* Makes the phrase button take full width */
+  padding: 12px;
+  font-size: 16px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  text-align: left; /* Optional: align text left */
+}
+
+.audio-btn {
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  padding: 10px;
+  margin-left: 8px;
+}
+
+.audio-btn:hover {
+  background-color: teal;
+  color: white;
+}
+
