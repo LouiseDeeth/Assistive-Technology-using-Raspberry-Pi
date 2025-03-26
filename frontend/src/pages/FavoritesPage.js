@@ -12,6 +12,14 @@ function FavoritesPage({ darkMode }) {
     { text: "Sorry", image: "/images/favorites/Sorry.png" },
   ];
 
+  const playAudio = (phrase) => {
+    const fileName = phrase.replace(/\s+/g, "_") + ".mp3";
+    const audioPath = `/audio/phrases/${fileName}`;
+    const audio = new Audio(audioPath);
+    audio.play();
+  };
+  
+  
   const [selectedPhrase, setSelectedPhrase] = useState(null);
 
   const handlePhraseClick = (phrase) => {
@@ -35,20 +43,26 @@ function FavoritesPage({ darkMode }) {
         )}
       </div>
 
-      {/* Phrase Buttons */}
       <div className="phrase-buttons">
-        {phrases.map((phrase) => (
-          <button
-            key={phrase.text}
-            className={`phrase-btn ${
-              selectedPhrase?.text === phrase.text ? "active" : ""
-            }`}
-            onClick={() => handlePhraseClick(phrase)}
-          >
-            {phrase.text}
-          </button>
-        ))}
-      </div>
+  {phrases.map((phrase) => (
+    <div key={phrase.text} className="phrase-row">
+      <button
+        className={`phrase-btn ${
+          selectedPhrase?.text === phrase.text ? "active" : ""
+        }`}
+        onClick={() => handlePhraseClick(phrase)}
+      >
+        {phrase.text}
+      </button>
+      <button
+        className="audio-btn"
+        onClick={() => playAudio(phrase.text)}
+      >
+        🔊
+      </button>
+    </div>
+  ))}
+</div>
     </div>
   );
 }
