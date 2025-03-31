@@ -4,6 +4,9 @@ function CameraPage() {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const [photoTaken, setPhotoTaken] = useState(false);
+    const [isProcessing, setIsProcessing] = useState(false);
+    const [geminiResponse, setGeminiResponse] = useState(null);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         navigator.mediaDevices.getUserMedia({ video: true })
@@ -11,6 +14,7 @@ function CameraPage() {
                 videoRef.current.srcObject = stream;
             })
             .catch((error) => console.error("Error accessing camera:", error));
+            SetError("Failed to access camera. Please check permissions.");
     }, []);
 
 
@@ -24,6 +28,8 @@ function CameraPage() {
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
         setPhotoTaken(true);
+
+        setGeminiResponse(null)
     };
 
     const handleDeletePhoto = () => {
@@ -32,17 +38,91 @@ function CameraPage() {
 
         context.clearRect(0, 0, canvas.width, canvas.height);
         setPhotoTaken(false);
+        setGeminiResponse(null);
+    };
+
+    const sendToGemini = async () => {
+        if(!photoTaken) return;
+         try {
+            setIsProcessing(true);
+            setError(null);
+            
+            // Get the image data from the canvas
+            const canvas = canvasRef.current;
+            const imageData = canvas.toDataURL('image/jpeg');
+            
+            // Send the image to the Flask backend
+            const response = await fetch('http://localhost:5000/api/process-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ image: imageData }),
+            });
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            
+            if (data.status === 'success') {
+                setGeminiResponse(data.result);
+            } else {
+                throw new Error(data.message || 'Unknown error occurred');
+            }
+        } catch (err) {
+            console.error('Error sending image to Gemini:', err);
+            setError(`Failed to process image: ${err.message}`);
+        } finally {
+            setIsProcessing(false);
+        }
     };
 
     return (
         <div className="camera-page">
             <h2>Camera</h2>
-            <video ref={videoRef} autoPlay playsInline style={{ width: "100%", maxWidth: "400px" }} />
+            <video 
+                ref={videoRef} 
+                    autoPlay playsInline 
+                    style={{ width: "100%", maxWidth: "400px" }} 
+                />
             <br />
             <button onClick={handleTakePhoto}>📸 Take Photo</button>
             <button onClick={handleDeletePhoto} disabled={!photoTaken}>🗑️ Delete</button>
+            <button 
+                onClick={sendToGemini} 
+                disabled={!photoTaken || isProcessing}
+                style={{ backgroundColor: isProcessing ? '#ccc' : '#4CAF50' }}
+            >
+                {isProcessing ? 'Processing...' : '🔍 Analyze with Gemini'}
+            </button>
             <br />
-            <canvas ref={canvasRef} style={{ display: photoTaken ? "block" : "none", marginTop: "20px", maxWidth: "100%" }}></canvas>
+            <canvas 
+                ref={canvasRef} 
+                    style={{ 
+                        display: photoTaken ? "block" : "none", 
+                        marginTop: "20px", 
+                        maxWidth: "100%" }}>
+            </canvas>
+             {error && (
+                <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>
+                    {error}
+                </div>
+            )}
+            {geminiResponse && (
+                <div className="gemini-response" style={{ 
+                    marginTop: '20px',
+                    padding: '15px',
+                    backgroundColor: '#f0f0f0',
+                    borderRadius: '5px',
+                    maxWidth: '400px'
+                }}>
+                    <h3>Gemini's Analysis:</h3>
+                    <p>{geminiResponse}</p>
+                </div>
+            )}
+            
         </div>
     );
 }
