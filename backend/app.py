@@ -2,9 +2,13 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 import os
 import base64
-from gemini import GeminiAPI
+import cv2
+import numpy as np
+from translator import Translator  # Import your Translator class
 
+# Initialize Flask app
 app = Flask(__name__)
+# Enable CORS to allow requests from React app
 CORS(app)
 
 # Create folder for temporary images
@@ -12,9 +16,9 @@ UPLOAD_FOLDER = 'temp_images'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# Initialize Gemini API client
-gemini_client = GeminiAPI()
-    
+# Initialize translator
+translator = Translator()
+
 @app.route('/api/status', methods=['GET'])
 def get_status():
     """Simple endpoint to check if the server is running"""
@@ -25,7 +29,7 @@ def get_status():
 
 @app.route('/api/process-image', methods=['POST'])
 def process_image():
-    """Endpoint to process an image with Gemini API"""
+    """Endpoint to process an image with your translator"""
     try:
         # Check if we received image data
         if 'image' not in request.json:
@@ -44,20 +48,31 @@ def process_image():
         # Decode the base64 data
         image_binary = base64.b64decode(image_data)
         
-        # Save the image to a temporary file
-        filename = os.path.join(UPLOAD_FOLDER, 'latest_capture.jpg')
-        with open(filename, 'wb') as f:
-            f.write(image_binary)
+        # Convert to numpy array for OpenCV
+        nparr = np.frombuffer(image_binary, np.uint8)
         
-        # Process with Gemini API
-        prompt = "Describe this image in detail. What can you see?"
-        description = gemini_client.describe_image(filename, prompt)
+        # Decode image
+        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        
+        if frame is None:
+            return jsonify({
+                'status': 'error',
+                'message': 'Failed to decode image'
+            }), 400
+        
+        # Save the image to a temporary file (optional, for debugging)
+        filename = os.path.join(UPLOAD_FOLDER, 'latest_capture.jpg')
+        cv2.imwrite(filename, frame)
+        
+        # Process with your translator
+        result = translator.translate(frame)
         
         # Return the result
         return jsonify({
             'status': 'success',
             'message': 'Image processed successfully',
-            'result': description
+            'result': result['text'],
+            'confidence': result['confidence']
         })
     
     except Exception as e:
