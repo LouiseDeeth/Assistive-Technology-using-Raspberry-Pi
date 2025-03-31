@@ -7,17 +7,27 @@ from dotenv import load_dotenv
 
 class Translator:
     def __init__(self):
+        """Initialize the Gemini API-based sign language translator."""
         load_dotenv() 
 
+        # Get API key from environment variable
         self.api_key = os.getenv("key")
         if not self.api_key:
-            print("Warning: api key not found")
+            print("Warning: API key not found. Please set 'key' in your .env file")
+        
+        # Base URL for Gemini Pro Vision API
         self.api_url = "https://generativelanguage.googleapis.com/v1/models/gemini-pro-vision:generateContent"
-        _, buffer = cv2.imencode('.jpg', frame)
     
-        return base64.b64encode(buffer).decode('utf-8')
-    
-    def encode_image(self_frame):
+    def encode_image(self, frame):
+        """
+        Encode an image frame to base64 for API submission.
+        
+        Args:
+            frame: OpenCV image frame (numpy array)
+            
+        Returns:
+            Base64 encoded string of the image
+        """
         _, buffer = cv2.imencode('.jpg', frame)
         return base64.b64encode(buffer).decode('utf-8')
     
@@ -112,37 +122,62 @@ class Translator:
             print(f"Error calling Gemini API: {e}")
             return {"text": "Error", "confidence": 0.0}
     
-    def test_translator():
-        """Test function to verify translator functionality with a sample image."""
-        # Check if we have a sample image to test with
-        sample_files = [f for f in os.listdir("output") if f.endswith(".jpg")] if os.path.exists("output") else []
+    def translate_from_file(self, image_path):
+        """
+        Translate sign language from an image file using Gemini API.
         
-        if not sample_files:
-            print("No sample images found in output directory. Please run camera.py first.")
-            return False
-        
-        # Use the most recent image
-        sample_file = sorted(sample_files)[-1]
-        sample_path = os.path.join("output", sample_file)
-        
-        print(f"Testing translator with sample image: {sample_path}")
-        
-        # Load the image
-        image = cv2.imread(sample_path)
-        if image is None:
-            print(f"Failed to load image: {sample_path}")
-            return False
-        
-        # Create translator and translate
-        translator = SignTranslator()
-        result = translator.translate(image)
-        
-        print("\n=== TRANSLATION RESULT ===")
-        print(f"Sign Language Detected: {result['text']}")
-        print(f"Confidence: {result['confidence']:.2f}")
-        print("===========================")
-        
-        return True
+        Args:
+            image_path: Path to the image file
+            
+        Returns:
+            Dictionary with translation results
+        """
+        try:
+            # Read image from file
+            frame = cv2.imread(image_path)
+            
+            if frame is None:
+                print(f"Failed to load image: {image_path}")
+                return {"text": "Failed to load image", "confidence": 0.0}
+            
+            # Use the translate method with the loaded frame
+            return self.translate(frame)
+            
+        except Exception as e:
+            print(f"Error loading or translating image: {e}")
+            return {"text": "Error processing image", "confidence": 0.0}
+
+def test_translator():
+    """Test function to verify translator functionality with a sample image."""
+    # Check if we have a sample image to test with
+    sample_files = [f for f in os.listdir("output") if f.endswith(".jpg")] if os.path.exists("output") else []
+    
+    if not sample_files:
+        print("No sample images found in output directory. Please run camera.py first.")
+        return False
+    
+    # Use the most recent image
+    sample_file = sorted(sample_files)[-1]
+    sample_path = os.path.join("output", sample_file)
+    
+    print(f"Testing translator with sample image: {sample_path}")
+    
+    # Load the image
+    image = cv2.imread(sample_path)
+    if image is None:
+        print(f"Failed to load image: {sample_path}")
+        return False
+    
+    # Create translator and translate
+    translator = Translator()
+    result = translator.translate(image)
+    
+    print("\n=== TRANSLATION RESULT ===")
+    print(f"Sign Language Detected: {result['text']}")
+    print(f"Confidence: {result['confidence']:.2f}")
+    print("===========================")
+    
+    return True
 
 
 if __name__ == "__main__":
