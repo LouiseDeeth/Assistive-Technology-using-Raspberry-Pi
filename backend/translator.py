@@ -29,7 +29,7 @@ class Translator:
         _, buffer = cv2.imencode('.jpg', frame)
         return base64.b64encode(buffer).decode('utf-8')
     
-    def translate(image):
+    def translate(self, image):
         """
         Translate sign language from an image using Gemini API.
         """
@@ -46,20 +46,19 @@ class Translator:
                 "Declare the sign language sign presented in the image. Just respond with the sign. If no sign detected, state 'No sign detected'", 
                 {"mime_type": "image/jpeg", "data": image}])    
 
-            if response.status_code == 200:
+            if response:
                 # Get Gemini's response
                 gemini_description = response.text if response else "No description available."
-                return jsonify({"description": gemini_description})
+                return {"text": gemini_description}
             else:
-                error_message = f"API error: {response.status_code}"
                 try:
                     error_detail = response.json()
-                    error_message += f" - {error_detail.get('error', {}).get('message', 'Unknown error')}"
+                    error_message = f" - {error_detail.get('error', {}).get('message', 'Unknown error')}"
                 except:
                     pass
                 
                 print(error_message)
-                return {"text": "API Error", "confidence": 0.0}
+                return {"text": "API Error"}
                 
         except Exception as e:
             print(f"Error calling Gemini API: {e}")
