@@ -14,7 +14,7 @@ function CameraPage() {
                 videoRef.current.srcObject = stream;
             })
             .catch((error) => console.error("Error accessing camera:", error));
-            SetError("Failed to access camera. Please check permissions.");
+            setError("Failed to access camera. Please check permissions.");
     }, []);
 
 
@@ -42,15 +42,15 @@ function CameraPage() {
     };
 
     const sendToGemini = async () => {
-        if(!photoTaken) return;
-         try {
+        if (!photoTaken) return;
+        try {
             setIsProcessing(true);
             setError(null);
-            
+
             // Get the image data from the canvas
             const canvas = canvasRef.current;
             const imageData = canvas.toDataURL('image/jpeg');
-            
+
             // Send the image to the Flask backend
             const response = await fetch('http://localhost:5000/api/process-image', {
                 method: 'POST',
@@ -65,7 +65,7 @@ function CameraPage() {
             }
 
             const data = await response.json();
-            
+
             if (data.status === 'success') {
                 setGeminiResponse(data.result);
             } else {
@@ -82,36 +82,37 @@ function CameraPage() {
     return (
         <div className="camera-page">
             <h2>Camera</h2>
-            <video 
-                ref={videoRef} 
-                    autoPlay playsInline 
-                    style={{ width: "100%", maxWidth: "400px" }} 
-                />
+            <video
+                ref={videoRef}
+                autoPlay playsInline
+                style={{ width: "100%", maxWidth: "400px" }}
+            />
             <br />
             <button onClick={handleTakePhoto}>📸 Take Photo</button>
             <button onClick={handleDeletePhoto} disabled={!photoTaken}>🗑️ Delete</button>
-            <button 
-                onClick={sendToGemini} 
+            <button
+                onClick={sendToGemini}
                 disabled={!photoTaken || isProcessing}
                 style={{ backgroundColor: isProcessing ? '#ccc' : '#4CAF50' }}
             >
                 {isProcessing ? 'Processing...' : '🔍 Analyze with Gemini'}
             </button>
             <br />
-            <canvas 
-                ref={canvasRef} 
-                    style={{ 
-                        display: photoTaken ? "block" : "none", 
-                        marginTop: "20px", 
-                        maxWidth: "100%" }}>
+            <canvas
+                ref={canvasRef}
+                style={{
+                    display: photoTaken ? "block" : "none",
+                    marginTop: "20px",
+                    maxWidth: "100%"
+                }}>
             </canvas>
-             {error && (
+            {error && (
                 <div className="error-message" style={{ color: 'red', marginTop: '10px' }}>
                     {error}
                 </div>
             )}
             {geminiResponse && (
-                <div className="gemini-response" style={{ 
+                <div className="gemini-response" style={{
                     marginTop: '20px',
                     padding: '15px',
                     backgroundColor: '#f0f0f0',
@@ -122,7 +123,7 @@ function CameraPage() {
                     <p>{geminiResponse}</p>
                 </div>
             )}
-            
+
         </div>
     );
 }
