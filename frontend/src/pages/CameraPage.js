@@ -26,9 +26,8 @@ function CameraPage() {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
+    
         setPhotoTaken(true);
-
         setGeminiResponse(null)
     };
 
@@ -43,6 +42,7 @@ function CameraPage() {
 
     const sendToGemini = async () => {
         if (!photoTaken) return;
+        
         try {
             setIsProcessing(true);
             setError(null);
