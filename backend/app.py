@@ -44,8 +44,7 @@ def process_image():
         image_data = request.json['image']
         
         # Remove the header from the base64 string (if present)
-        if 'base64,' in image_data:
-            image_data = image_data.split('base64,')[1]
+        image_data = image_data.split(",")[1]
         
         # # Decode the base64 data
         # image_binary = base64.b64decode(image_data)
