@@ -4,14 +4,15 @@ import os
 import base64
 import cv2
 import numpy as np
-from translator import Translator  # Import your Translator class
+from translator import Translator 
+import traceback
 
 # Initialize Flask app
 app = Flask(__name__)
 # Enable CORS to allow requests from React app
 CORS(app)
 
-# Create folder for temporary images
+# Create folder to hold temporary images if it does not exist
 UPLOAD_FOLDER = 'temp_images'
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
@@ -19,9 +20,10 @@ if not os.path.exists(UPLOAD_FOLDER):
 # Initialize translator
 translator = Translator()
 
+
 @app.route('/api/status', methods=['GET'])
 def get_status():
-    """Simple endpoint to check if the server is running"""
+    """Endpoint to check if the server is running"""
     return jsonify({
         'status': 'success',
         'message': 'Flask server is running'
@@ -29,9 +31,9 @@ def get_status():
 
 @app.route('/api/process-image', methods=['POST'])
 def process_image():
-    """Endpoint to process an image with your translator"""
+    """Endpoint to process an image with translator"""
     try:
-        # Check if we received image data
+        # Check if image data received
         if 'image' not in request.json:
             return jsonify({
                 'status': 'error',
@@ -45,38 +47,38 @@ def process_image():
         if 'base64,' in image_data:
             image_data = image_data.split('base64,')[1]
         
-        # Decode the base64 data
-        image_binary = base64.b64decode(image_data)
+        # # Decode the base64 data
+        # image_binary = base64.b64decode(image_data)
         
-        # Convert to numpy array for OpenCV
-        nparr = np.frombuffer(image_binary, np.uint8)
+        # # Convert to numpy array for OpenCV
+        # nparr = np.frombuffer(image_binary, np.uint8)
         
-        # Decode image
-        frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+        # # Decode image
+        # frame = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
         
-        if frame is None:
-            return jsonify({
-                'status': 'error',
-                'message': 'Failed to decode image'
-            }), 400
+        # if frame is None:
+        #     return jsonify({
+        #         'status': 'error',
+        #         'message': 'Failed to decode image'
+        #     }), 400
         
-        # Save the image to a temporary file (optional, for debugging)
-        filename = os.path.join(UPLOAD_FOLDER, 'latest_capture.jpg')
-        cv2.imwrite(filename, frame)
+        # # Save the image to a temporary file (optional, for debugging)
+        # filename = os.path.join(UPLOAD_FOLDER, 'latest_capture.jpg')
+        # cv2.imwrite(filename, frame)
         
         # Process with your translator
-        result = translator.translate(frame)
+        result = translator.translate(image_data)
         
         # Return the result
         return jsonify({
             'status': 'success',
             'message': 'Image processed successfully',
-            'result': result['text'],
-            'confidence': result['confidence']
+            'result': result['text']
         })
     
     except Exception as e:
         print(f"Error processing image: {e}")
+        traceback.print_exc()
         return jsonify({
             'status': 'error',
             'message': str(e)
