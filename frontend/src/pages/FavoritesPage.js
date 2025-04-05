@@ -11,7 +11,7 @@ function FavoritesPage({ darkMode }) {
     { text: "Please", image: "/images/favorites/Please.png" },
     { text: "Sorry", image: "/images/favorites/Sorry.png" },
   ];
-  
+
   const [selectedPhrase, setSelectedPhrase] = useState(null);
 
   const handlePhraseClick = (phrase) => {
@@ -35,32 +35,31 @@ function FavoritesPage({ darkMode }) {
         )}
       </div>
 
-  {/* Phrase Buttons */}
-  <div className="phrase-buttons">
-    {phrases.map((phrase) => (
-      <div key={phrase.text} className="phrase-audio">
-        <button
-          className={`phrase-btn ${
-            selectedPhrase?.text === phrase.text ? "active" : ""
-          }`}
-          onClick={() => handlePhraseClick(phrase)}
-        >
-          {phrase.text}
-        </button>
+      {/* Phrase Buttons */}
+      <div className="phrase-buttons">
+        {phrases.map((phrase) => (
+          <div key={phrase.text} className="phrase-audio">
+            <button
+              className={`phrase-btn ${selectedPhrase?.text === phrase.text ? "active" : ""
+                }`}
+              onClick={() => handlePhraseClick(phrase)}
+            >
+              {phrase.text}
+            </button>
 
-        <button
-          className="audio-btn"
-          onClick={() => {
-            const sanitizedFileName = phrase.text.toLowerCase().replace(/\s+/g, "_");
-            const audio = new Audio(`/audio/phrases/${sanitizedFileName}.mp3`);
-            audio.play();
-          }}
-        >
-          🔊
-        </button>
+            <button
+              className="audio-btn"
+              onClick={() => {
+                const sanitizedFileName = phrase.text.toLowerCase().replace(/\s+/g, "_");
+                const audio = new Audio(`/audio/phrases/${sanitizedFileName}.mp3`);
+                audio.play();
+              }}
+            >
+              🔊
+            </button>
+          </div>
+        ))}
       </div>
-  ))}
-</div>
     </div>
   );
 }

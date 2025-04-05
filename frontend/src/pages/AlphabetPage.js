@@ -52,11 +52,11 @@ function AlphabetPage() {
         audio.play();
     };
 
-    
+
     return (
         <div className="alphabet-page">
             <h2>Sign Language Alphabet</h2>
-            
+
             {/* Sign Display Section */}
             <div className="sign-display">
                 {selectedSign ? (
@@ -69,8 +69,8 @@ function AlphabetPage() {
             {/* On-Screen Keyboard */}
             <div className="keyboard">
                 {alphabet.map((sign) => (
-                    <button 
-                        key={sign.letter} 
+                    <button
+                        key={sign.letter}
                         className={`key ${selectedSign?.letter === sign.letter ? "active" : ""}`}
                         onClick={() => handleLetterClick(sign.letter)}
                     >
