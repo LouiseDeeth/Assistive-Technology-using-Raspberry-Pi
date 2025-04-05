@@ -14,7 +14,7 @@ function CameraPage() {
                 videoRef.current.srcObject = stream;
             })
             .catch((error) => console.error("Error accessing camera:", error));
-            setError("Failed to access camera. Please check permissions.");
+        setError("Failed to access camera. Please check permissions.");
     }, []);
 
 
@@ -26,7 +26,7 @@ function CameraPage() {
         canvas.width = video.videoWidth;
         canvas.height = video.videoHeight;
         context.drawImage(video, 0, 0, canvas.width, canvas.height);
-    
+
         setPhotoTaken(true);
         setGeminiResponse(null)
     };
@@ -42,7 +42,7 @@ function CameraPage() {
 
     const sendToGemini = async () => {
         if (!photoTaken) return;
-        
+
         try {
             setIsProcessing(true);
             setError(null);
@@ -90,10 +90,11 @@ function CameraPage() {
             <br />
             <button onClick={handleTakePhoto}>📸 Take Photo</button>
             <button onClick={handleDeletePhoto} disabled={!photoTaken}>🗑️ Delete</button>
+
             <button
                 onClick={sendToGemini}
                 disabled={!photoTaken || isProcessing}
-                style={{ backgroundColor: isProcessing ? '#ccc' : '#4CAF50' }}
+                className={`analyze-btn ${isProcessing ? "disabled" : ""}`}
             >
                 {isProcessing ? 'Processing...' : '🔍 Analyze with Gemini'}
             </button>
@@ -112,13 +113,7 @@ function CameraPage() {
                 </div>
             )}
             {geminiResponse && (
-                <div className="gemini-response" style={{
-                    marginTop: '20px',
-                    padding: '15px',
-                    backgroundColor: '#f0f0f0',
-                    borderRadius: '5px',
-                    maxWidth: '400px'
-                }}>
+                <div className="gemini-response" >
                     <h3>Gemini's Analysis:</h3>
                     <p>{geminiResponse}</p>
                 </div>
