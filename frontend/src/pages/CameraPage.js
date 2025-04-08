@@ -19,21 +19,79 @@ function CameraPage() {
     const [isProcessing, setIsProcessing] = useState(false);
     const [geminiResponse, setGeminiResponse] = useState(null);
     const [error, setError] = useState(null);
+    const [lastSpoken, setLastSpoken] = useState("");
+
 
     useEffect(() => {
+        const video = videoRef.current;
+        const canvas = canvasRef.current;
+        const context = canvas.getContext("2d");
+      
+        // Start webcam
         navigator.mediaDevices.getUserMedia({ video: true })
-            .then((stream) => {
-                videoRef.current.srcObject = stream;
-            })
-            .catch((error) => {
-                console.error("Error accessing camera:", error);
-                setError("Failed to access camera. Please check permissions.");
-            });
-    
-        // Prime speech engine to avoid first-time cutoff
+          .then((stream) => {
+            video.srcObject = stream;
+          })
+          .catch((error) => {
+            console.error("Error accessing camera:", error);
+            setError("Failed to access camera. Please check permissions.");
+          });
+      
+        // Prime speech engine
         const utterance = new SpeechSynthesisUtterance(" ");
         window.speechSynthesis.speak(utterance);
-    }, []);
+      
+        // Auto-capture every few seconds
+        const intervalId = setInterval(async () => {
+          if (video && video.readyState === 4) {
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+      
+            const imageData = canvas.toDataURL("image/jpeg");
+      
+            try {
+              const response = await fetch('http://localhost:5000/api/process-image', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ image: imageData }),
+              });
+      
+              if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+      
+              const data = await response.json();
+
+              if (data.status === 'success') {
+                setGeminiResponse(data.result);
+                speakText(data.result);
+              } else {
+                throw new Error(data.message || 'Unknown error occurred');
+              }
+            } catch (err) {
+              console.error("Error during Gemini request:", err);
+              setError("Failed to analyze video stream.");
+            }
+          }
+        }, 5000); // Every 5 seconds
+      
+        return () => clearInterval(intervalId); 
+      }, [lastSpoken]); // Add lastSpoken to dependencies
+      
+
+    // useEffect(() => {
+    //     navigator.mediaDevices.getUserMedia({ video: true })
+    //         .then((stream) => {
+    //             videoRef.current.srcObject = stream;
+    //         })
+    //         .catch((error) => {
+    //             console.error("Error accessing camera:", error);
+    //             setError("Failed to access camera. Please check permissions.");
+    //         });
+    
+    //     // Prime speech engine to avoid first-time cutoff
+    //     const utterance = new SpeechSynthesisUtterance(" ");
+    //     window.speechSynthesis.speak(utterance);
+    // }, []);
     
 
 
@@ -86,12 +144,17 @@ function CameraPage() {
             const data = await response.json();
 
             if (data.status === 'success') {
-                setGeminiResponse(data.result);
-                speakText(data.result); // Speak the response
-              } else {
-                throw new Error(data.message || 'Unknown error occurred');
-              }
+                const newResult = data.result.trim();
+                setGeminiResponse(newResult);
               
+                if (
+                  newResult.toLowerCase() !== "no sign detected" &&
+                  newResult !== lastSpoken
+                ) {
+                  speakText(newResult);
+                  setLastSpoken(newResult);
+                }
+              }              
         } catch (err) {
             console.error('Error sending image to Gemini:', err);
             setError(`Failed to process image: ${err.message}`);
