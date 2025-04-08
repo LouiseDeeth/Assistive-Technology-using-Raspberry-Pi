@@ -1,9 +1,14 @@
 import React, { useRef, useEffect, useState } from "react";
 
 const speakText = (text) => {
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = 'en-US';
-    window.speechSynthesis.speak(utterance);
+    if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(text);
+        setTimeout(() => {
+          window.speechSynthesis.speak(utterance);
+        }, 200); // delay by 100ms
+      } else {
+        console.warn("Text-to-speech not supported in this browser.");
+      }
   };
   
 
@@ -20,9 +25,16 @@ function CameraPage() {
             .then((stream) => {
                 videoRef.current.srcObject = stream;
             })
-            .catch((error) => console.error("Error accessing camera:", error));
-        setError("Failed to access camera. Please check permissions.");
+            .catch((error) => {
+                console.error("Error accessing camera:", error);
+                setError("Failed to access camera. Please check permissions.");
+            });
+    
+        // Prime speech engine to avoid first-time cutoff
+        const utterance = new SpeechSynthesisUtterance(" ");
+        window.speechSynthesis.speak(utterance);
     }, []);
+    
 
 
     const handleTakePhoto = () => {
