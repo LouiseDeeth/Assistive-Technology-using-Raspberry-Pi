@@ -1,5 +1,12 @@
 import React, { useRef, useEffect, useState } from "react";
 
+const speakText = (text) => {
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = 'en-US';
+    window.speechSynthesis.speak(utterance);
+  };
+  
+
 function CameraPage() {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
@@ -68,9 +75,11 @@ function CameraPage() {
 
             if (data.status === 'success') {
                 setGeminiResponse(data.result);
-            } else {
+                speakText(data.result); // Speak the response
+              } else {
                 throw new Error(data.message || 'Unknown error occurred');
-            }
+              }
+              
         } catch (err) {
             console.error('Error sending image to Gemini:', err);
             setError(`Failed to process image: ${err.message}`);
