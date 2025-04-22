@@ -63,7 +63,7 @@ function CameraPage() {
 
               if (data.status === 'success') {
                 setGeminiResponse(data.result);
-                speakText(data.result);
+                // speakText(data.result);
               } else {
                 throw new Error(data.message || 'Unknown error occurred');
               }
