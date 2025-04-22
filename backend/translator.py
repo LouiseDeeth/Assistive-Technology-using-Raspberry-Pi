@@ -10,9 +10,10 @@ import google.generativeai as genai
 class Translator:
     def __init__(self):
         """Initialize the Gemini API-based sign language translator."""
-        load_dotenv() 
+        load_dotenv(dotenv_path="key.env")
 
-        GEMINI_API_KEY = "AIzaSyAv1QNdeHX25MnEvW4tp4sXrSwknuNAoU0"
+        # Hide API key from public view 
+        GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
         GEMINI_API_URL = "https://generativelanguage.googleapis.com/v1/models/gemini-pro-vision:generateContent"
         genai.configure(api_key=GEMINI_API_KEY)
     
@@ -20,7 +21,7 @@ class Translator:
         """
         Encode an image frame to base64 for API submission.
         
-        Args:
+        Args
             frame: OpenCV image frame (numpy array)
             
         Returns:

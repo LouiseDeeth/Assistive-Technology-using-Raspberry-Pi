@@ -21,3 +21,9 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Hide the API key from public view
+backend/key.env
+
+# Ignore the virtual environment folder 
+backend/venv/
