@@ -1,0 +1,7 @@
+opencv-python
+tensorflow
+tflite-runtime
+gtts
+numpy
+google-generativeai
+requests

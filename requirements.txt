@@ -1,8 +1,0 @@
-opencv-python
-mediapipe
-tensorflow
-tensorflow-lite
-gtts
-numpy
-google-generativeai 
-requests
