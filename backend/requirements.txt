@@ -1,4 +1,6 @@
 opencv-python
+tensorflow
+tflite-runtime
 mediapipe
 numpy
 google-generativeai
@@ -7,3 +9,5 @@ flask-cors
 python-dotenv
 requests
 gtts
+
+
