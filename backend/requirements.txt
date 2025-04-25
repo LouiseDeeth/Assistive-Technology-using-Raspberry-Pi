@@ -1,5 +1,11 @@
 opencv-python
+<<<<<<< HEAD
 # mediapipe - unused currently
+=======
+tensorflow
+tflite-runtime
+mediapipe
+>>>>>>> d1a436f4abbdeaad30494198e0d76facc3fb2bd3
 numpy
 google-generativeai
 flask
@@ -7,3 +13,5 @@ flask-cors
 python-dotenv
 requests
 gtts
+
+
