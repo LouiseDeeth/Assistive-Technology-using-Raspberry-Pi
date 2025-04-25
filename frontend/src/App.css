@@ -76,6 +76,8 @@ body {
   margin: 40px 10px;
   color: teal;
   font-size: 20px;
+  position: relative;
+  z-index: 1;
 }
 
 /* Buttons */
@@ -113,6 +115,7 @@ body {
   display: flex;
   justify-content: space-around;
   padding: 10px;
+  z-index: 2;
 }
 
 .navbar a {
