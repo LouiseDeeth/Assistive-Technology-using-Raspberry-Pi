@@ -1,7 +1,11 @@
 opencv-python
-tensorflow
-tflite-runtime
-gtts
+mediapipe
 numpy
 google-generativeai
+flask
+flask-cors
+python-dotenv
 requests
+gtts
+base64
+cv2
