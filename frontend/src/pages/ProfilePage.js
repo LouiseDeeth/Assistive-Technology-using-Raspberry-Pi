@@ -5,7 +5,7 @@ function ProfilePage({ darkMode, setDarkMode }) {
     return (
         <div className={`profile-page ${darkMode ? "dark" : ""}`}>
             <div className="profile-image-container">
-                <h2 class="app-title">Assistive Technology App</h2>
+                <h2 className="app-title">Assistive Technology App</h2>
                 <img src="/images/picture1.png" alt="Sign Language" className="Picture1" />
 
                 <h4>Hi there! </h4>
