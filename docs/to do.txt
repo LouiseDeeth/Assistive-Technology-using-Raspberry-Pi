@@ -1,3 +1,4 @@
+##  outdated  ##
 1.	Raspberry PI needs MediaPipe and OpenCV installed 
 - sudo apt install -y python3-numpy
 - sudo apt install -y python3-opencv
