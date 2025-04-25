@@ -1,0 +1,17 @@
+python3 – to open python terminal (instead of bash)
+exit() – to go back to bash terminal.
+
+The following dependencies were installed:
+OpenCV – For image processing
+MediaPipe – Real time processing of video and images
+TensorFlow and TensorFlow Lite – for AI model processing.
+NumPy – for handling numerical computations.
+gTTS – Google text to speech.
+Tesseract-OCR - for text recognition 
+
+if you need to install again run:
+
+pip install -r requirements.txt
+
+Raspberry PI needs OpenCV and MediaPipe installed:
+-	pip install opencv-python mediapipe numpy
