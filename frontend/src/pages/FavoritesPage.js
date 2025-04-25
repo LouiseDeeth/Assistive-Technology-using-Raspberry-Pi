@@ -50,7 +50,7 @@ function FavoritesPage({ darkMode }) {
             <button
               className="audio-btn"
               onClick={() => {
-                const sanitizedFileName = phrase.text.toLowerCase().replace(/\s+/g, "_");
+                const sanitizedFileName = phrase.text.replace(/\s+/g, "_");
                 const audio = new Audio(`/audio/phrases/${sanitizedFileName}.mp3`);
                 audio.play();
               }}
