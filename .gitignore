@@ -49,7 +49,7 @@ __pycache__/
 .coverage
 htmlcov/
 
-# Hide potentially sensistive information
+# Hide potentially sensitive information
 *.log
 
 
