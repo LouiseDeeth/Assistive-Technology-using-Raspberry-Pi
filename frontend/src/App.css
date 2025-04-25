@@ -1,19 +1,34 @@
-* {
+/* 
+ * Global Reset and Box Model
+ * Ensures all elements use the same box-sizing model
+ */
+ * {
   box-sizing: border-box;
 }
 
+/* 
+ * Base HTML Styles
+ * Sets minimum height for full-page layouts
+ */
 html,
 body {
   height: 100%;
 }
 
+/* 
+ * Root Element Styles
+ * Creates a flex column layout that fills the viewport height
+ */
 #root {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-/* General Styles */
+/* 
+ * General Body Styles
+ * Sets default typography, spacing, colors, and text alignment
+ */
 body {
   font-family: Arial, sans-serif;
   margin: 0;
@@ -23,6 +38,10 @@ body {
   color: #000000;
 }
 
+/* 
+ * Main App Title
+ * Styles for the application's title with teal branding color
+ */
 .app-title {
   padding-top: 50px;
   font-size: 36px;
@@ -30,7 +49,10 @@ body {
   color: teal;
 }
 
-/* Profile Page Layout */
+/* 
+ * Profile Page Layout
+ * Centers content in a column layout with maximum width
+ */
 .profile-page {
   display: flex;
   flex-direction: column;
@@ -40,12 +62,19 @@ body {
   margin: auto;
 }
 
-/* Profile Avatar */
+/* 
+ * Profile Image Container
+ * Adds vertical spacing around the profile image
+ */
 .profile-image-container img {
   margin-top: 60px;
   margin-bottom: 60px;
 }
 
+/* 
+ * Profile Picture Styling
+ * Creates a rounded profile image with teal border and padding
+ */
 .Picture1 {
   width: 200px;
   height: 200px;
@@ -56,19 +85,29 @@ body {
   padding: 15px;
 }
 
-/* Profile Info */
+/* 
+ * Profile Information Container
+ * Centers text and sets maximum width for profile details
+ */
 .profile-info {
   text-align: center;
   max-width: 80%;
   margin-top: 10px;
 }
 
+/* 
+ * Profile Information Paragraphs
+ * Sets font size and spacing for profile text
+ */
 .profile-info p {
   font-size: 20px;
   margin: 5px 0;
 }
 
-/* Dark Mode Toggle */
+/* 
+ * Dark Mode Toggle Switch
+ * Styles for the theme toggle with flex layout and teal accent
+ */
 .LightDarkToggle {
   display: flex;
   align-items: center;
@@ -80,7 +119,10 @@ body {
   z-index: 1;
 }
 
-/* Buttons */
+/* 
+ * Profile Buttons Container
+ * Stacks buttons vertically with spacing
+ */
 .profile-buttons {
   display: flex;
   flex-direction: column;
@@ -89,24 +131,38 @@ body {
   align-items: center;
 }
 
-/* Dark Mode */
+/* 
+ * Dark Mode Theme
+ * Changes background and text colors for dark mode
+ */
 .dark {
   background-color: #222;
   color: white;
 }
 
+/* 
+ * Dark Mode Component Styles
+ * Adjusts component backgrounds for dark mode
+ */
 .dark .sign-display,
 .dark .navbar {
   background-color: #004d4d;
 }
 
+/* 
+ * Dark Mode Button Styles
+ * Adjusts button colors for dark mode
+ */
 .dark .phrase-btn,
 .dark .key {
   background-color: #444;
   color: white;
 }
 
-/* Navbar */
+/* 
+ * Navigation Bar
+ * Fixed bottom navigation with teal background and evenly spaced items
+ */
 .navbar {
   position: fixed;
   bottom: 0;
@@ -118,13 +174,20 @@ body {
   z-index: 2;
 }
 
+/* 
+ * Navigation Links
+ * Styles for the navigation bar links
+ */
 .navbar a {
   font-size: 28px;
   text-decoration: none;
   color: white;
 }
 
-/* General Page Styling */
+/* 
+ * Alphabet Page Layout
+ * Centers content vertically with padding for the bottom navbar
+ */
 .alphabet-page {
   display: flex;
   flex-direction: column;
@@ -133,7 +196,10 @@ body {
   padding-bottom: 80px;
 }
 
-/* Sign Display Section */
+/* 
+ * Sign Display Container
+ * Creates a fixed-size bordered container for displaying sign images
+ */
 .sign-display {
   display: flex;
   align-items: center;
@@ -147,7 +213,10 @@ body {
   overflow: hidden;
 }
 
-/* Sign Image */
+/* 
+ * Sign Image Styling
+ * Makes images fill the container while maintaining aspect ratio
+ */
 .sign-image {
   width: 100%;
   height: 100%;
@@ -155,7 +224,10 @@ body {
   border-radius: 0;
 }
 
-/* Keyboard Grid */
+/* 
+ * Keyboard Grid Layout
+ * Creates a 6-column grid for the alphabet buttons
+ */
 .keyboard {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -164,7 +236,10 @@ body {
   max-width: 300px;
 }
 
-/* Keyboard Keys */
+/* 
+ * Keyboard Keys
+ * Styles for the individual letter/number buttons
+ */
 .key {
   background-color: #e0e0e0;
   border: none;
@@ -176,17 +251,28 @@ body {
   text-align: center;
 }
 
-/* Highlight Selected Letter */
+/* 
+ * Active Key Highlight
+ * Highlights the currently selected letter/number
+ */
 .key.active {
   background-color: teal;
   color: white;
 }
 
+/* 
+ * Key Hover Effect
+ * Changes color on hover for better interactivity
+ */
 .key:hover {
   background-color: teal;
   color: white;
 }
 
+/* 
+ * Camera Page Layout
+ * Sets up the camera view with scrolling and padding for navbar
+ */
 .camera-page {
   display: flex;
   flex-direction: column;
@@ -197,6 +283,10 @@ body {
   max-height: 100vh;
 }
 
+/* 
+ * Camera Video Element
+ * Styles for the video preview with border
+ */
 .camera-page video {
   width: 95%;
   max-width: 500px;
@@ -205,6 +295,10 @@ body {
   background-color: black;
 }
 
+/* 
+ * Camera Page Buttons
+ * Styles for camera control buttons with teal accent
+ */
 .camera-page button {
   margin: 10px;
   padding: 12px 20px;
@@ -216,15 +310,27 @@ body {
   cursor: pointer;
 }
 
+/* 
+ * Disabled Button State
+ * Visual indicator for disabled buttons
+ */
 .camera-page button:disabled {
   background-color: gray;
   cursor: not-allowed;
 }
 
+/* 
+ * Button Hover Effect
+ * Darkens buttons on hover
+ */
 .camera-page button:hover {
   background-color: darkcyan;
 }
 
+/* 
+ * Favorites Page Layout
+ * Centers content with padding for the navbar
+ */
 .favorites-page {
   display: flex;
   flex-direction: column;
@@ -233,6 +339,10 @@ body {
   padding-bottom: 80px;
 }
 
+/* 
+ * Phrase Buttons Container
+ * Stacks phrase buttons vertically with constrained width
+ */
 .phrase-buttons {
   display: flex;
   flex-direction: column;
@@ -241,6 +351,10 @@ body {
   max-width: 300px;
 }
 
+/* 
+ * Phrase Button Styling
+ * Styles for the individual phrase buttons
+ */
 .phrase-btn {
   padding: 12px;
   font-size: 16px;
@@ -250,16 +364,28 @@ body {
   cursor: pointer;
 }
 
+/* 
+ * Active Phrase Highlight
+ * Highlights the currently selected phrase
+ */
 .phrase-btn.active {
   background-color: teal;
   color: white;
 }
 
+/* 
+ * Phrase Button Hover Effect
+ * Changes color on hover for better interactivity
+ */
 .phrase-btn:hover {
   background-color: teal;
   color: white;
 }
 
+/* 
+ * Transition Effects
+ * Smooth color transitions for theme changes
+ */
 button,
 body,
 .profile-page,
@@ -268,34 +394,45 @@ body,
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-
+/* 
+ * Button Focus State
+ * Outlines focused buttons for accessibility
+ */
 button:focus {
   outline: 2px solid teal;
 }
 
+/* 
+ * Dark Mode Page Styles
+ * Applies dark theme to all main pages with full height
+ */
 .dark .profile-page,
 .dark .alphabet-page,
 .dark .favorites-page,
 .dark .camera-page {
   background-color: #222;
   min-height: 100vh;
-  padding-bottom: 80px;
-  /* for navbar space */
+  padding-bottom: 80px; /* for navbar space */
   box-sizing: border-box;
 }
 
-/* audio buttons */
+/* 
+ * Phrase Audio Container
+ * Layout for phrase buttons with accompanying audio buttons
+ */
 .phrase-audio {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  /* Aligns the audio button to the right */
+  justify-content: space-between; /* Aligns the audio button to the right */
   width: 100%;
 }
 
+/* 
+ * Phrase Button in Audio Container
+ * Makes the phrase button expand to fill available space
+ */
 .phrase-btn {
-  flex: 1;
-  /* Makes the phrase button take full width */
+  flex: 1; /* Makes the phrase button take full width */
   padding: 12px;
   font-size: 16px;
   background-color: #e0e0e0;
@@ -305,6 +442,10 @@ button:focus {
   text-align: center;
 }
 
+/* 
+ * Audio Button Styling
+ * Styles for the sound playback buttons
+ */
 .audio-btn {
   background-color: #e0e0e0;
   border: none;
@@ -314,21 +455,37 @@ button:focus {
   margin-left: 8px;
 }
 
+/* 
+ * Audio Button Hover Effect
+ * Changes color on hover
+ */
 .audio-btn:hover {
   background-color: teal;
   color: white;
 }
 
+/* 
+ * Dark Mode Audio Button
+ * Adjusts audio button colors for dark mode
+ */
 .dark .audio-btn {
   background-color: #555;
   color: #fff;
 }
 
+/* 
+ * Dark Mode Audio Button Hover
+ * Hover effect for audio buttons in dark mode
+ */
 .dark .audio-btn:hover {
   background-color: teal;
   color: #fff;
 }
 
+/* 
+ * Analyze Button
+ * Styles for the AI analysis button with transition effect
+ */
 .analyze-btn {
   margin: 10px;
   padding: 12px 20px;
@@ -341,10 +498,18 @@ button:focus {
   transition: background-color 0.3s ease;
 }
 
+/* 
+ * Analyze Button Hover Effect
+ * Darkens analyze button on hover
+ */
 .analyze-btn:hover {
   background-color: darkcyan;
 }
 
+/* 
+ * Disabled Analyze Button
+ * Visual indicator for disabled analyze button
+ */
 .analyze-btn.disabled {
   background-color: gray;
   cursor: not-allowed;

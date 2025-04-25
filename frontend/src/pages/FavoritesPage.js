@@ -1,6 +1,17 @@
+/**
+ * FavouritesPage Component
+ * 
+ * This component displays a collection of favourite sign language phrases with:
+ * - A display area showing the selected sign image
+ * - Buttons for each phrase with audio playback functionality
+ * 
+ * @param {Object} props - Component props
+ * @param {boolean} props.darkMode - Indicates if dark mode is enabled
+ */
 import React, { useState } from "react";
 
 function FavoritesPage({ darkMode }) {
+  // Array of common phrases with their corresponding image paths
   const phrases = [
     { text: "Hello", image: "/images/favorites/Hello.png" },
     { text: "Goodbye", image: "/images/favorites/Goodbye.png" },
@@ -12,8 +23,13 @@ function FavoritesPage({ darkMode }) {
     { text: "Sorry", image: "/images/favorites/Sorry.png" },
   ];
 
+  // State to track the currently selected phrase
   const [selectedPhrase, setSelectedPhrase] = useState(null);
 
+  /**
+   * Handles click event when a phrase button is selected
+   * @param {Object} phrase - The phrase object that was clicked
+   */
   const handlePhraseClick = (phrase) => {
     setSelectedPhrase(phrase);
   };
@@ -22,7 +38,7 @@ function FavoritesPage({ darkMode }) {
     <div className="favorites-page">
       <h2>Favourite Signs</h2>
 
-      {/* Sign Display */}
+      {/* Sign Display Section - Shows the currently selected sign or a prompt */}
       <div className="sign-display">
         {selectedPhrase ? (
           <img
@@ -35,10 +51,11 @@ function FavoritesPage({ darkMode }) {
         )}
       </div>
 
-      {/* Phrase Buttons */}
+      {/* Phrase Buttons Section - Lists all available phrases with play audio option */}
       <div className="phrase-buttons">
         {phrases.map((phrase) => (
           <div key={phrase.text} className="phrase-audio">
+            {/* Button to select and display the sign */}
             <button
               className={`phrase-btn ${selectedPhrase?.text === phrase.text ? "active" : ""
                 }`}
@@ -47,10 +64,13 @@ function FavoritesPage({ darkMode }) {
               {phrase.text}
             </button>
 
+            {/* Button to play audio pronunciation of the phrase */}
             <button
               className="audio-btn"
               onClick={() => {
+                // Convert phrase text to filename format by replacing spaces with underscores
                 const sanitizedFileName = phrase.text.replace(/\s+/g, "_");
+                // Create and play the audio file
                 const audio = new Audio(`/audio/phrases/${sanitizedFileName}.mp3`);
                 audio.play();
               }}
