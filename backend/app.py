@@ -63,7 +63,17 @@ def process_image():
             'status': 'error',
             'message': str(e)
         }), 500
-
+    
+    @app.route('/')
+    def index():
+        return jsonify({
+            'status': 'success',
+            'message': 'Welcome to the Image Translation API',
+            'endpoints': {
+                'status': '/api/status',
+                'process-image': '/api/process-image (POST)'
+            }
+        })
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
