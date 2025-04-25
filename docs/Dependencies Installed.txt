@@ -1,17 +1,30 @@
+# Python Packages and Dependencies
 python3 – to open python terminal (instead of bash)
 exit() – to go back to bash terminal.
 
-The following dependencies were installed:
-OpenCV – For image processing
-MediaPipe – Real time processing of video and images
-TensorFlow and TensorFlow Lite – for AI model processing.
-NumPy – for handling numerical computations.
-gTTS – Google text to speech.
-Tesseract-OCR - for text recognition 
+## The following dependencies were installed:
+- opencv-python - For image processing and camera interaction
+- mediapipe - For hand tracking and gesture recognition
+- numpy - For handling numerical computations
+- google-generativeai - For the Gemini API integration
+- flask - For backend server functionality
+- flask-cors - To handle cross-origin requests
+- python-dotenv - To load environment variables from .env files
+- requests - For making HTTP requests
+- gtts - Google Text-to-Speech for generating audio files
 
+## Installation Instructions
 if you need to install again run:
-
+```
+cd backend
 pip install -r requirements.txt
+```
 
+## Raspberry PI Specific Setup
 Raspberry PI needs OpenCV and MediaPipe installed:
--	pip install opencv-python mediapipe numpy
+```
+sudo apt update
+sudo apt install -y python3-opencv
+sudo apt install -y python3-numpy
+pip install mediapipe opencv-python flask flask-cors google-generativeai python-dotenv requests gtts
+```
