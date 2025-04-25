@@ -1,11 +1,34 @@
+# Documentation and References
+
+## Core Technologies
 Python - https://docs.python.org/3/
+Flask - https://flask.palletsprojects.com/en/latest/
+React - https://reactjs.org/docs/getting-started.html
+
+## Hardware
 Raspberry Pi - https://www.raspberrypi.com/documentation/
-Thonny - https://thonny.org/
-VS Code - https://code.visualstudio.com/docs
+Pi Camera Module v3 - https://www.raspberrypi.com/documentation/accessories/camera.html
+
+## Computer Vision and Image Processing
 OpenCV - https://docs.opencv.org/4.x/index.html
 MediaPipe - https://ai.google.dev/edge/mediapipe/solutions/guide
-TensorFlow - https://www.tensorflow.org/api_docs
+
+## Data Processing
 NumPy - https://numpy.org/doc/
-gTTS - https://gtts.readthedocs.io/en/latest/
-Tesseract - https://tesseract-ocr.github.io/
-Gemini API - https://ai.google.dev/
+
+## APIs and External Services
+Google Generative AI (Gemini API) - https://ai.google.dev/
+gTTS (Google Text-to-Speech) - https://gtts.readthedocs.io/en/latest/
+
+## Development Tools
+VS Code - https://code.visualstudio.com/docs
+GitHub - https://docs.github.com/en
+Flask-CORS - https://flask-cors.readthedocs.io/en/latest/
+python-dotenv - https://pypi.org/project/python-dotenv/
+
+## Web Technologies
+React Router - https://reactrouter.com/en/main
+Material UI - https://mui.com/material-ui/getting-started/
+
+## Additional Resources
+JavaScript Speech Synthesis - https://developer.mozilla.org/en-US/docs/Web/API/SpeechSynthesis
