@@ -26,15 +26,30 @@ dist/
 out/
 
 # Hide the API key from public view
-.env
-*.env
 **/*.env
 backend/key.env
 
 # Ignore the virtual environment folder 
 venv/
 **/venv/
+env/
+.env/
+.venv/
+ENV/
 
-# Python cache
+# Python
+*.egg-info/
+*.egg
+*.pyc
+*.pyo
 __pycache__/
 *.py[cod]
+*$py.class
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Hide potentially sensistive information
+*.log
+
+
