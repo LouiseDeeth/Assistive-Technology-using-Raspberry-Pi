@@ -1,6 +1,6 @@
 opencv-python
-tensorflow
-tflite-runtime
+#tensorflow
+#tflite-runtime
 mediapipe
 numpy
 google-generativeai
